@@ -1,13 +1,20 @@
+import {
+  isPermissionGranted,
+  requestPermission,
+  sendNotification,
+} from "@tauri-apps/api/notification";
 import { useLiveQuery } from "dexie-react-hooks";
 import moment from "moment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReactLinkify from "react-linkify";
 import "./App.css";
+import { LOGGER_TIME_FORMAT } from "./constants";
 // import { Grid, Input } from "@chakra-ui/react";
 import { db } from "./database";
-console.log(db);
+
 function App() {
   const [inputLog, setInputLog] = useState("");
+  const [notificationPermission, setNotificationPermission] = useState(false);
   const logs = useLiveQuery(() => {
     return db.logs.orderBy("id").reverse().limit(50).toArray();
   });
@@ -18,7 +25,7 @@ function App() {
       const id = await db.logs.add({
         message: inputLog,
         tag: "untagged",
-        timestamp: moment().format("MMMM Do YYYY, h:mm:ss a"),
+        timestamp: moment().format(LOGGER_TIME_FORMAT),
       });
       setInputLog("");
       alert(`Log added with id ${id}`);
@@ -28,9 +35,37 @@ function App() {
     }
   };
 
+  const sendRemindLogNotification = () => {
+    sendNotification({
+      title: "Logger Notification",
+      body: "Don't forget to log your time!",
+      icon: "⌚",
+    });
+  };
+
+  useEffect(() => {
+    let notificationInterval: NodeJS.Timer;
+    isPermissionGranted().then(async (permission) => {
+      if (!permission) {
+        permission = (await requestPermission()) === "granted";
+      }
+      if (permission) {
+        sendRemindLogNotification();
+        notificationInterval = setInterval(() => {
+          sendRemindLogNotification();
+        }, 1000 * 60 * 5);
+      }
+      setNotificationPermission(permission);
+    });
+
+    return () => {
+      clearInterval(notificationInterval);
+    };
+  }, []);
+
   return (
     <div className="App">
-      <h1>Your Logs at One Place</h1>
+      <h1>Your Logs at One Place </h1>
       <form onSubmit={onFormSubmit}>
         <input
           type="text"
