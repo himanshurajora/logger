@@ -14,6 +14,7 @@
     "@types/react-linkify": "^1.0.1",
     "dexie": "3.2.2",
     "dexie-react-hooks": "1.1.1",
+    "moment": "2.29.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-linkify": "^1.0.0-alpha",
