@@ -3,6 +3,7 @@ import moment from "moment";
 import { useState } from "react";
 import ReactLinkify from "react-linkify";
 import "./App.css";
+import { LOGGER_TIME_FORMAT } from "./constants";
 // import { Grid, Input } from "@chakra-ui/react";
 import { db } from "./database";
 console.log(db);
@@ -18,7 +19,7 @@ function App() {
       const id = await db.logs.add({
         message: inputLog,
         tag: "untagged",
-        timestamp: moment().format("MMMM Do YYYY, h:mm:ss a"),
+        timestamp: moment().format(LOGGER_TIME_FORMAT),
       });
       setInputLog("");
       alert(`Log added with id ${id}`);
