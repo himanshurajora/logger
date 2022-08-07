@@ -1,6 +1,6 @@
 {
   "name": "logger",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "dependencies": {
     "@tauri-apps/api": "1.0.2",
@@ -27,6 +27,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "release": "yarn version --patch",
     "tauri": "tauri"
   },
   "eslintConfig": {
