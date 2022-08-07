@@ -1,6 +1,6 @@
 {
   "name": "logger",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "private": true,
   "dependencies": {
     "@tauri-apps/api": "1.0.2",
@@ -29,7 +29,7 @@
     "eject": "react-scripts eject",
     "release": "yarn version --patch && npm run add && npm run commit && npm run push && npm run push:tags",
     "add": "git add .",
-    "commit": "git commit -m 'New Logger Version'",
+    "commit": "git commit -m 'release'",
     "push": "git push",
     "push:tags": "git push --tags",
     "tauri": "tauri"
