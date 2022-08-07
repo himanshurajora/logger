@@ -13,7 +13,7 @@ function App() {
   });
   const onFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    if (inputLog.length === 0) return;
     try {
       const id = await db.logs.add({
         message: inputLog,
