@@ -14,7 +14,7 @@ import { db } from "./database";
 
 function App() {
   const [inputLog, setInputLog] = useState("");
-  const [notificationPermission, setNotificationPermission] = useState(false);
+  const [, setNotificationPermission] = useState(false);
   const logs = useLiveQuery(() => {
     return db.logs.orderBy("id").reverse().limit(50).toArray();
   });
