@@ -24,7 +24,8 @@
   },
   "scripts": {
     "start": "cross-env BROWSER=none react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && npm run copy:files",
+    "copy:files": "xcopy build docs /u /i /e /y",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "release": "yarn version --patch && npm run add && npm run commit && npm run push && npm run push:tags",
