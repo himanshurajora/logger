@@ -85,7 +85,10 @@ function App() {
                 <ReactLinkify>{log.message}</ReactLinkify>
               </div>
               {/* <div className="log-status">{log.tag}</div> */}
-              <div className="log-time">{log.timestamp}</div>
+              <div className="log-time">
+                {moment(log.timestamp, LOGGER_TIME_FORMAT).fromNow()} -{" "}
+                {log.timestamp}
+              </div>
             </div>
           );
         })}
