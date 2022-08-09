@@ -63,6 +63,16 @@ function App() {
     };
   }, []);
 
+  // auto focus on window focus
+  useEffect(() => {
+    window.addEventListener("keydown", (e) => {
+      if (!(document.getElementById("input-log") === document.activeElement))
+        if (e.key === " ") document.getElementById("input-log")?.focus();
+    });
+
+    return () => window.removeEventListener("keydown", () => {});
+  }, []);
+
   return (
     <div className="App">
       <h1>Your Logs at One Place </h1>
@@ -75,6 +85,8 @@ function App() {
           value={inputLog}
           width="100%"
           placeholder="Write and Enter"
+          id="input-log"
+          autoFocus
         />
       </form>
       <div className="logs">
