@@ -3,6 +3,7 @@ import {
   requestPermission,
   sendNotification,
 } from "@tauri-apps/api/notification";
+import { getTauriVersion } from "@tauri-apps/api/app";
 import { useLiveQuery } from "dexie-react-hooks";
 import moment from "moment";
 import { useEffect, useState } from "react";
@@ -45,18 +46,20 @@ function App() {
 
   useEffect(() => {
     let notificationInterval: NodeJS.Timer;
-    isPermissionGranted().then(async (permission) => {
-      if (!permission) {
-        permission = (await requestPermission()) === "granted";
-      }
-      if (permission) {
-        sendRemindLogNotification();
-        notificationInterval = setInterval(() => {
+    if (!!(window as any)?.__TAURI_IPC__) {
+      isPermissionGranted().then(async (permission) => {
+        if (!permission) {
+          permission = (await requestPermission()) === "granted";
+        }
+        if (permission) {
           sendRemindLogNotification();
-        }, 1000 * 60 * 5);
-      }
-      setNotificationPermission(permission);
-    });
+          notificationInterval = setInterval(() => {
+            sendRemindLogNotification();
+          }, 1000 * 60 * 5);
+        }
+        setNotificationPermission(permission);
+      });
+    }
 
     return () => {
       clearInterval(notificationInterval);

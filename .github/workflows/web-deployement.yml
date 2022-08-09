@@ -1,4 +1,4 @@
-name: Build & deploy
+name: Deploy Web Version
 
 # Keeping the web version up to date rather than the tauri version
 # Did it because tauri builds are slower and the web version is quick to deploy and see
@@ -31,9 +31,6 @@ jobs:
 
       - name: Build project
         run: npm run build
-
-      - name: Run tests
-        run: npm run test
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v2
