@@ -1,6 +1,6 @@
 {
   "name": "logger",
-  "version": "0.1.75",
+  "version": "0.1.78",
   "private": true,
   "homepage": "https://himanshurajora.github.io/logger",
   "dependencies": {
