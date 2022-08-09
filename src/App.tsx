@@ -3,7 +3,6 @@ import {
   requestPermission,
   sendNotification,
 } from "@tauri-apps/api/notification";
-import { getTauriVersion } from "@tauri-apps/api/app";
 import { useLiveQuery } from "dexie-react-hooks";
 import moment from "moment";
 import { useEffect, useState } from "react";
