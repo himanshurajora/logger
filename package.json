@@ -2,6 +2,7 @@
   "name": "logger",
   "version": "0.1.75",
   "private": true,
+  "homepage": "https://himanshurajora.github.io/logger",
   "dependencies": {
     "@tauri-apps/api": "1.0.2",
     "@testing-library/jest-dom": "5.16.4",
